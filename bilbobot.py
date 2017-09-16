@@ -10,6 +10,16 @@ app = Flask(__name__)
 def hi():
     return "hi! i'm bilbo"
 
+@app.route('/test')
+def test():
+    sc.api_call(
+        "chat.postMessage",
+        channel="#random",
+        text="my name jeff"
+    )
+
+    return "200 OK"
+
 @app.route('/post/<input>')
 def post(input):
     sc.api_call(
@@ -17,6 +27,8 @@ def post(input):
         channel="#general",
         text=input
     )
+
+    return "200 OK"
 
 
 if __name__ == '__main__':
