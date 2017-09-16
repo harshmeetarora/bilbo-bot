@@ -1,10 +1,11 @@
 #!/bin/python
-import config
+import config, json
 from flask import Flask
 from slackclient import SlackClient
-from watson-developer-cloud import VisualRecognitionV3
+from watson_developer_cloud import VisualRecognitionV3
 
 sc = SlackClient(config.slack_token)
+vr = VisualRecognitionV3('2017-09-16',api_key=config.watson_api_key)
 app = Flask(__name__)
 
 @app.route('/')
@@ -21,7 +22,7 @@ def test():
 
     return "200 OK"
 
-@app.route('/custom/<input>', methods=['GET'])
+@app.route('/custom/<input>')
 def custom(input):
     sc.api_call(
         "chat.postMessage",
