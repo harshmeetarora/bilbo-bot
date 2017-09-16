@@ -9,7 +9,7 @@ MAIN BILBOBOT
 '''
 
 sc = SlackClient(config.slack_token)
-vr = VisualRecognitionV3('2017-09-16',api_key=config.watson_api_key,classifier_id=)
+vr = VisualRecognitionV3('2017-09-16',api_key=config.watson_api_key)
 app = Flask(__name__)
 
 ### === WATSON INTEGRATION ===
