@@ -8,7 +8,10 @@ from Restaurant import Restaurant
 class Restaurants:
 	""" Attribute of list of restaurants, initially empty """ 
 	restaurants = []
-	ZOMATO_SEARCH_API_URL = "https://developers.zomato.com/api/v2.1/search?apikey=5ea93656e886f5bc6a60ada64221cd92&radius=5000&"
+	ZOMATO_SEARCH_API_URL = "https://developers.zomato.com/api/v2.1/search?apikey={0}&radius=5000&".format(config.zomato_api_key)
+	
+	def __init__(self):
+		self.restaurants = []
 	
 	def searchRestaurantsWith(self, keyword):
 		""" (String) -> list of strings 
@@ -17,10 +20,8 @@ class Restaurants:
 		"""
 		# construct proper URL
 		apiUrl = self.ZOMATO_SEARCH_API_URL + urllib.parse.urlencode({'q':keyword})
-		print(apiUrl)
 		# call zomato api
 		json_data = requests.get(apiUrl).json()
-		print(json_data)
 		# add each restaurant name to the list of restaurants
 		size = json_data['results_found']
 		for i in range(size):
@@ -31,7 +32,6 @@ class Restaurants:
 			# create new restaurant object
 			restaurant = Restaurant(r_name, r_address, r_avgCost, r_rating)
 			self.restaurants.append(restaurant)
-		print(len(self.restaurants))
 		
 	def checkListLength(self):
 		if len(self.restaurants) < 5:
