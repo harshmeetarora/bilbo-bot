@@ -23,7 +23,6 @@ class Restaurants:
 		print(json_data)
 		# add each restaurant name to the list of restaurants
 		size = json_data['results_found']
-		print(size)
 		for i in range(size):
 			r_name = json_data['restaurants'][i]['restaurant']['name']
 			r_address = json_data['restaurants'][i]['restaurant']['location']['address']
@@ -32,7 +31,14 @@ class Restaurants:
 			# create new restaurant object
 			restaurant = Restaurant(r_name, r_address, r_avgCost, r_rating)
 			self.restaurants.append(restaurant)
-	
+		print(len(self.restaurants))
+		
+	def checkListLength(self):
+		if len(self.restaurants) < 5:
+			return false
+		else:
+			return true
+			
 	def showResults(self):
 		for r in self.restaurants:
 			r.printInfo()
