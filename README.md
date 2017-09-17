@@ -33,10 +33,12 @@ _**doofieBot** is your favorite foodieFriend!_ a resourceful chatbot who will st
 - The bilbo-backend is accessible over AWS console. Make your life easier by doing the following:  
     1. Store the `htn.pem` key to your local `~/.ssh` folder
     2. In your `~/.ssh/config` file, copy in:
+        ```
         Host bilbo
             Hostname x.x.x.x
             User ubuntu
             IdentityFile ~/.ssh/htn.pem
+        ```
     3. Access server from your CLI by invoking `$ ssh bilbo`  
 - See further instructions inside the `env/` directory for configuration details, API keys etc. 
 
