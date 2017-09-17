@@ -14,17 +14,17 @@ def get_oauth2_token():
 
 
 def searchRestaurantsWith(latitude,longitude,radius,keyword):
-	head = {'Content-Type': 'application/json',
-			'Authorization': get_oauth2_token()}
+    head = {'Content-Type': 'application/json',
+            'Authorization': get_oauth2_token()}
 
-	# build search query parameters
-	qp = {'latitude': latitude,
-		  'longitude': longitude,
-		  'radius': radius,
-		  'term': keyword}
+    # build search query parameters
+    qp = {'latitude': latitude,
+          'longitude': longitude,
+          'radius': radius,
+          'term': keyword}
 
-	r = requests.get(strings.YELP_SEARCH_URL, headers=head, params=qp, verify=True)
+    r = requests.get(strings.YELP_SEARCH_URL, headers=head, params=qp, verify=True)
 
-	#json.dumps(r.json(),indent=2,separators=(',',':'))
-	return r.json()
+    #json.dumps(r.json(),indent=2,separators=(',',':'))
+    return r.json()
 
