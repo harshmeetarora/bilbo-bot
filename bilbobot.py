@@ -3,8 +3,7 @@ import config, json, strings
 from flask import Flask, request
 from slackclient import SlackClient
 from watson_developer_cloud import VisualRecognitionV3
-from Restaurants import Restaurants
-import Restaurant
+from restaurants import *
 
 '''
 MAIN BILBOBOT
@@ -34,30 +33,39 @@ def watsonify():
             first = img
     top_two = [first['class'],second['class']]
     
-    processTopTwo(top_two)
-    """
     sc.api_call(
         "chat.postMessage",
         channel="#general",
         text=(strings.watson_found).format(top_two[0],top_two[1]))
-    """
-    return top_two
 
-# method to process the top 2 results
-def processTopTwo(topTwo):
-    # search with the keyword
-    results.searchRestaurantsWith(topTwo[0])
-    # check if enough results
-    if (results.checkListLength() == False):
-        results.searchRestaurantsWith(topTwo[1])
-    # print results to the screen
-    output = ""
-    for restaurant in results.restaurants():
-        output += restaurant.printInfo()
+    output = processTopTwo(top_two)
+
     # send msg to general channel
     sc.api_call("chat.postMessage",
                 channel="#general",
                 text=output)
+
+    return "200 OK"
+
+
+
+# method to process the top 2 results
+def processTopTwo(topTwo):
+    # search with the keyword
+    list_restaurants = searchRestaurantsWith(topTwo[0])
+
+    # check if enough results
+    if (len(list_restaurants) < 5):
+        list_restaurants = searchRestaurantsWith(topTwo[1])
+
+    # print results to the screen
+    output = ""
+    for r in list_restaurants:
+        print(r)
+        output += list_restaurants[r]
+
+    print(output)
+    return output
      
      
 
@@ -89,6 +97,5 @@ def custom(input):
 
 
 if __name__ == '__main__':
-    results = Restaurants()    
     app.run()
     
