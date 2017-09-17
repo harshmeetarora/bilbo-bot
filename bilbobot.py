@@ -1,6 +1,6 @@
 #!/bin/python
 import config, json, strings
-from flask import Flask, request
+from flask import Flask, request, current_app
 from slackclient import SlackClient
 from watson_developer_cloud import VisualRecognitionV3
 from restaurants import *
@@ -20,6 +20,9 @@ app = Flask(__name__)
 def watsonify():
     # process image recognition
     imgurl = request.form["text"]
+    sc.api_call("chat.postMessage",
+                channel="#general",
+                text=(strings.watson_looking).format(imgurl))
     res_body = vr.classify(images_url=imgurl)
 
     print(json.dumps(res_body,indent=2))
@@ -47,37 +50,53 @@ def watsonify():
     return "200 OK"
 
 
+### === YELP / ZOMATO INTEGRATION ===
+
 # takes a keyword and generates the results off of Yelp for top locations
+# uses the result of this calculation to return information to the web app
 @app.route('/results', methods=['GET'])
 def handleSearchKeyword():
     keyword = request.args.get('keyword')
+    restaurant_list = searchRestaurantsWith(51.5033640,-0.1276250,5000,keyword)
+    json.dumps(restaurant_list,indent=2,separators=(',',':'))
 
-    return "200 OK"
+    return current_app.send_static_file('results.html')
 
+# given location JSON, parse into string
+def parseAddress(loc):
+    return "{0}, {1} {2}".format(loc["address1"],loc["city"],loc["state"])
 
 # method to process the top 2 results
 def processTopTwo(topTwo):
     # search with the keyword
-    output = searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[0])
+    keyword = topTwo[0]
+    restaurant_list = searchRestaurantsWith(51.5033640,-0.1276250,5000,keyword)
 
-    #output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
+    # check if enough results
+    if (len(restaurant_list['businesses']) < 5):
+        keyword = topTwo[1]
+        restaurant_list = searchRestaurantsWith(51.5033640,-0.1276250,5000,keyword)
+
+    for i in range(0,5):
+        name = restaurant_list['businesses'][i]['name']
+        address = parseAddress(restaurant_list['businesses'][i]['location'])
+        rating = restaurant_list['businesses'][i]['rating']
+        distance = restaurant_list['businesses'][i]['distance'] # THIS IS IN METRES
+        url = restaurant_list['businesses'][i]['url']
+        # Adding formatted results to an array of strings
+        recommendation = (strings.recommended).format(name, distance/1000, address, rating%5, url)
+        sc.api_call("chat.postMessage",
+                    channel="#general",
+                    text=recommendation)
+
+    output = "Go to http://54.186.16.182/results?keyword={} for more!".format(keyword)
 
     # send msg to general channel
     sc.api_call("chat.postMessage",
                 channel="#general",
                 text=output)
 
-    # check if enough results
-    #if (len(list_restaurants) < 5):
-    #    searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[1])
-
-    # print results to the screen
-    #output = ""
-    #for r in list_restaurants:
-    #    print(r)
-    #    output += list_restaurants[r]
-
-    return output
+    return strings._200_OK
      
      
 

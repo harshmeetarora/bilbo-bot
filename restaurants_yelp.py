@@ -25,5 +25,6 @@ def searchRestaurantsWith(latitude,longitude,radius,keyword):
 
 	r = requests.get(strings.YELP_SEARCH_URL, headers=head, params=qp, verify=True)
 
-	return json.dumps(r.json(),indent=2,separators=(',',':'))
+	#json.dumps(r.json(),indent=2,separators=(',',':'))
+	return r.json()
 
