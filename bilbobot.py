@@ -4,6 +4,7 @@ from flask import Flask, request
 from slackclient import SlackClient
 from watson_developer_cloud import VisualRecognitionV3
 from restaurants import *
+from restaurants_yelp import *
 
 '''
 MAIN BILBOBOT
@@ -38,8 +39,8 @@ def watsonify():
         channel="#general",
         text=(strings.watson_found).format(top_two[0],top_two[1]))
 
-    # output = processTopTwo(top_two)
-    output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
+    output = processTopTwo(top_two)
+    #output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
 
     # send msg to general channel
     sc.api_call("chat.postMessage",
@@ -60,19 +61,19 @@ def handleSearchKeyword():
 # method to process the top 2 results
 def processTopTwo(topTwo):
     # search with the keyword
-    list_restaurants = searchRestaurantsWith(topTwo[0])
+    output = searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[0])
 
     # check if enough results
-    if (len(list_restaurants) < 5):
-        list_restaurants = searchRestaurantsWith(topTwo[1])
+    #if (len(list_restaurants) < 5):
+    #    searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[1])
 
     # print results to the screen
-    output = ""
-    for r in list_restaurants:
-        print(r)
-        output += list_restaurants[r]
+    #output = ""
+    #for r in list_restaurants:
+    #    print(r)
+    #    output += list_restaurants[r]
 
-    print(output)
+    #print(output)
     return output
      
      
