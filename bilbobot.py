@@ -40,9 +40,6 @@ def watsonify():
         text=(strings.watson_found).format(top_two[0],top_two[1]))
 
     output = processTopTwo(top_two)
-    #output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
-
-    # send msg to general channel
     sc.api_call("chat.postMessage",
                 channel="#general",
                 text=output)
@@ -63,6 +60,13 @@ def processTopTwo(topTwo):
     # search with the keyword
     output = searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[0])
 
+    #output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
+
+    # send msg to general channel
+    sc.api_call("chat.postMessage",
+                channel="#general",
+                text=output)
+
     # check if enough results
     #if (len(list_restaurants) < 5):
     #    searchRestaurantsWith(51.5033640,-0.1276250,5000,topTwo[1])
@@ -73,7 +77,6 @@ def processTopTwo(topTwo):
     #    print(r)
     #    output += list_restaurants[r]
 
-    #print(output)
     return output
      
      
