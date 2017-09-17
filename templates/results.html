@@ -27,7 +27,11 @@
             <div class="card-block">
               <h4 class="card-title restaurant-name float-left"> Vindaloo </h4>
               <span class="badge badge-pill distance float-right"> 6 km </span>
-              <h6 class="address"> 175 steeles road </h6>
+              <h6 class="address">
+                {% if list %}
+                  <blockquote>{{ list }}</blockquote>
+                {% endif %}
+              </h6>
             </div>
           </div>
 

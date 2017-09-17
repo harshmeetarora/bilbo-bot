@@ -1,6 +1,6 @@
 #!/bin/python
 import config, json, strings
-from flask import Flask, request, current_app
+from flask import Flask, request, render_template
 from slackclient import SlackClient
 from watson_developer_cloud import VisualRecognitionV3
 from restaurants import *
@@ -60,7 +60,7 @@ def handleSearchKeyword():
     restaurant_list = searchRestaurantsWith(51.5033640,-0.1276250,5000,keyword)
     json.dumps(restaurant_list,indent=2,separators=(',',':'))
 
-    return current_app.send_static_file('results.html')
+    return render_template('results.html', list=restaurant_list)
 
 # given location JSON, parse into string
 def parseAddress(loc):
@@ -89,7 +89,7 @@ def processTopTwo(topTwo):
                     channel="#general",
                     text=recommendation)
 
-    output = "Go to http://54.186.16.182/results?keyword={} for more!".format(keyword)
+    output = "Go to <http://54.186.16.182/results?keyword={}> for more!".format(keyword)
 
     # send msg to general channel
     sc.api_call("chat.postMessage",

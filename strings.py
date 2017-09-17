@@ -14,5 +14,5 @@ YELP_TOKEN_EXCH = "https://api.yelp.com/oauth2/token"
 YELP_SEARCH_URL = "https://api.yelp.com/v3/businesses/search"
 
 ### UX
-recommended = ":heart_eyes: *DOOFieBot* recommends *{0}*! Located *{1:.2f}km* away at _{2}_, " \
+recommended = ":heart_eyes: *DOOFieBot* recommends *{0}*! \nLocated *{1:.2f}km* away at _{2}_, " \
             "{3}/5 people approve of this location. {4}"
