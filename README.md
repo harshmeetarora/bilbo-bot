@@ -4,15 +4,17 @@
 888    | 88888    | 88888    | 888    888 888    888  \  88888    |    888    
 888   /   Y888   /   Y888   /  888    888 888    888   |  Y888   /     888    
 888_-~     `88_-~     `88_-~   888    888 888___ 888__/    `88_-~      888 
-                                                                         v0.1
+                                                                         v1.0
 
 
 _**doofieBot** is your favorite foodieFriend!_ a resourceful chatbot who will stop at nothing to fulfill your gluttonous dreams  
 
 #### how it works
-- The latest iteration of **doofieBot** lurks on [Slack](https://api.slack.com/), its backend built with [Flask](http://flask.pocoo.org/) & powered by [Amazon EC2](https://aws.amazon.com/). 
-- **doofieBot** makes use of IBM's powerful [Watson Visual Recognition API](https://www.ibm.com/watson/services/visual-recognition/) to interpret pictures of delicious food queried by the user. 
-- After intelligently recognizing the food, **doofieBot** calls on [Yelp Fusion](https://www.yelp.com/fusion) to generate a list of nearby restaurants or businesses that serve or sell what you are looking for!
+- The latest iteration of **doofieBot** lurks on [Slack](https://api.slack.com/), its backend built with [Flask](http://flask.pocoo.org/) & powered by [Amazon EC2](https://aws.amazon.com/).  
+- **doofieBot** makes use of IBM's powerful [Watson Visual Recognition API](https://www.ibm.com/watson/services/visual-recognition/) to interpret pictures of delicious food queried by the user.  
+- After intelligently recognizing the food, **doofieBot** calls on [Yelp Fusion](https://www.yelp.com/fusion) to generate a list of nearby restaurants or businesses that serve or sell what you are looking for!  
+
+![/doof](doofie_ss.png "interacting with doofieBot")
 
 #### how it's built
 - over the [Flask](http://flask.pocoo.org/) framework, managed by [pip](https://pip.pypa.io/en/stable/), running on an [Apache](https://httpd.apache.org/) server & hosted in the cloud by [Amazon EC2](https://aws.amazon.com/ec2/)
@@ -35,5 +37,6 @@ _**doofieBot** is your favorite foodieFriend!_ a resourceful chatbot who will st
             User ubuntu
             IdentityFile ~/.ssh/htn.pem
     3. Access server from your CLI by invoking `$ ssh bilbo`  
-- See further instructions inside the `env/` directory for configuration details, API keys etc
+- See further instructions inside the `env/` directory for configuration details, API keys etc. 
 
+doofieBot v1.0 is licensed under the Apache License 2.0
