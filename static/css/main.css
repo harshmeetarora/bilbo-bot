@@ -1,0 +1,76 @@
+body {
+  padding: 2em 0em 0em 0em;
+  background-color: #efefef;
+}
+
+
+/** generic utility classes **/
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.shadow {
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.block {
+  display: block;
+}
+
+
+.side-nav-bar {
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.nav-items {
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.search_bar {
+}
+
+.restaurant-card {
+  margin: 0.5em 1em 1.5em 1em;
+  width: 90%;
+  display: inline-block;
+}
+
+.restaurant-card:hover {
+  border-color: red;
+}
+
+.card-img-top {
+  width: 100%;
+}
+
+.card-block {
+  padding: 1em 1em 0em 1em;
+}
+
+.restaurant-name {
+  max-width: 70%;
+  overflow: hidden;
+  font-size: 30px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.distance {
+  font-family: 'Raleway', sans-serif;
+  max-width: 100px;
+  overflow: hidden;
+  margin: 5px 0px 24px 0px;
+  font-weight: 100;
+  font-size: 17px;
+  background-color: #85a8e2;
+  color: white;
+}
+
+.address {
+  padding: 12em 0em 0em 0em;
+}
