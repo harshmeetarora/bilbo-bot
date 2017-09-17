@@ -1,3 +1,4 @@
+```
 888~-_     ,88~-_     ,88~-_   888~~  888 888~~  888~~\    ,88~-_   ~~~888~~~ 
 888   \   d888   \   d888   \  888___ 888 888___ 888   |  d888   \     888    
 888    | 88888    | 88888    | 888    888 888    888 _/  88888    |    888    
@@ -5,7 +6,7 @@
 888   /   Y888   /   Y888   /  888    888 888    888   |  Y888   /     888    
 888_-~     `88_-~     `88_-~   888    888 888___ 888__/    `88_-~      888 
                                                                          v1.0
-
+```
 
 _**doofieBot** is your favorite foodieFriend!_ a resourceful chatbot who will stop at nothing to fulfill your gluttonous dreams  
 
