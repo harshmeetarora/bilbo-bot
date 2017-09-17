@@ -39,7 +39,7 @@ def watsonify():
         text=(strings.watson_found).format(top_two[0],top_two[1]))
 
     # output = processTopTwo(top_two)
-    output = "Go to http://54.186.16.182/keyword for more results."
+    output = "Go to http://54.186.16.182/results?keyword={} for more results.".format(first['class'])
 
     # send msg to general channel
     sc.api_call("chat.postMessage",
@@ -48,6 +48,13 @@ def watsonify():
 
     return "200 OK"
 
+
+# takes a keyword and generates the results off of Yelp for top locations
+@app.route('/results', methods=['GET'])
+def handleSearchKeyword():
+    keyword = request.args.get('keyword')
+
+    return "200 OK"
 
 
 # method to process the top 2 results
