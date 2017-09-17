@@ -38,7 +38,8 @@ def watsonify():
         channel="#general",
         text=(strings.watson_found).format(top_two[0],top_two[1]))
 
-    output = processTopTwo(top_two)
+    # output = processTopTwo(top_two)
+    output = "Go to http://54.186.16.182/keyword for more results."
 
     # send msg to general channel
     sc.api_call("chat.postMessage",
